@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Tugas Pemweb 1</title>
+    <style>
+        /* CSS: Mengatur Tampilan/Desain Kalkulator */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        .kalkulator {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            width: 300px;
+        }
+        #layar {
+            width: 100%;
+            height: 50px;
+            background-color: #fff;
+            font-size: 24px;
+            text-align: right;
+            padding: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        .tombol-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #d4d4d4;
+        }
+        .operator {
+            background-color: #ff9500;
+            color: white;
+        }
+        .operator:hover {
+            background-color: #e08500;
+        }
+        .bersihkan {
+            background-color: #ff3b30;
+            color: white;
+        }
+        .bersihkan:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kalkulator">
+        <input type="text" id="layar" readonly placeholder="0">
+        <div class="tombol-container">
+            <button class="bersihkan" onclick="clearLayar()">C</button>
+            <button onclick="inputTombol('/')" class="operator">/</button>
+            <button onclick="inputTombol('*')" class="operator">x</button>
+            <button onclick="inputTombol('-')" class="operator">-</button>
+            
+            <button onclick="inputTombol('7')">7</button>
+            <button onclick="inputTombol('8')">8</button>
+            <button onclick="inputTombol('9')">9</button>
+            <button onclick="inputTombol('+')" class="operator">+</button>
+            
+            <button onclick="inputTombol('4')">4</button>
+            <button onclick="inputTombol('5')">5</button>
+            <button onclick="inputTombol('6')">6</button>
+            <button style="grid-row: span 2; background-color: #2bc443; color: white;" onclick="hitungHasil()">=</button>
+            
+            <button onclick="inputTombol('1')">1</button>
+            <button onclick="inputTombol('2')">2</button>
+            <button onclick="inputTombol('3')">3</button>
+            
+            <button style="grid-column: span 3;" onclick="inputTombol('0')">0</button>
+        </div>
+    </div>
+
+    <script>
+        let layar = document.getElementById('layar');
+
+        // Fungsi menampilkan angka/operator ke layar
+        function inputTombol(nilai) {
+            if (layar.value === "Error") {
+                layar.value = "";
+            }
+            layar.value += nilai;
+        }
+
+        // Fungsi membersihkan layar (Tombol C)
+        function clearLayar() {
+            layar.value = "";
+        }
+
+        // Fungsi mengevaluasi & menghitung string matematika (Tombol =)
+        function hitungHasil() {
+            try {
+                // Menggunakan fungsi eval() bawaan JS untuk memproses string aritmatika
+                if (layar.value !== "") {
+                    layar.value = eval(layar.value);
+                }
+            } catch (error) {
+                layar.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
